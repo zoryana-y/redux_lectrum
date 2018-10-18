@@ -1,10 +1,10 @@
 // Types
-import { types } from '.types';
+import { types } from './types';
 
 const initialState = {};
 
 export const reducer = (state = initialState, action) => {
-    switch (action.types) {
+    switch (action.type) {
         case types.TYPE:
             return state;
         default:
