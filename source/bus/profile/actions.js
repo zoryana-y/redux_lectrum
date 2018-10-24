@@ -8,4 +8,10 @@ export const profileAction = {
             payload: profile,
         };
     },
+
+    clearProfile: () => {
+        return {
+            type: types.CLEAR_PROFILE,
+        };
+    },
 };

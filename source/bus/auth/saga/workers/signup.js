@@ -1,6 +1,6 @@
 //Core
 import { put, apply } from 'redux-saga/effects';
- 
+
 // Instruments
 import { api } from '../../../../REST';
 import { uiActions } from '../../../ui/actions';
@@ -20,7 +20,7 @@ export function* signup ({ payload: userInfo }) {
 
         yield put(profileAction.fillProfile(profile));
         yield put(authActions.authenticate());
-        
+
     } catch (error) {
         yield put(uiActions.emitError(error, 'signup'));
     } finally {

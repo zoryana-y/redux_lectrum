@@ -1,42 +1,45 @@
 // Core
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// Pages
-import { Feed, Login, NewPassword, Profile, Signup } from '../pages';
+// Routers
+import Private from './Private';
+import Public from './Public';
 
-// Instruments
-import { book } from './book';
+// Components
+import { Loading } from '../components';
+
+// Actions
+import { authActions } from '../bus/auth/actions';
 
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.get('isAuthenticated'),
+        isInitialized:   state.auth.get('isInitialized'),
     };
+};
+
+const mapDispatchToProps = {
+    initializeAsync: authActions.initializeAsync,
 };
 
 @hot(module)
 @withRouter
-@connect(mapStateToProps)
-export default class App extends Component {
-    render () {
-        const { isAuthenticated } = this.props;
+@connect(mapStateToProps, mapDispatchToProps)
 
-        return isAuthenticated ? (
-            <Switch>
-                <Route component = { Feed } path = { book.feed } />
-                <Route component = { Profile } path = { book.profile } />
-                <Route component = { NewPassword } path = { book.newPassword } />
-                <Redirect to = { book.feed } />
-            </Switch>
-        ) :
-            (
-                <Switch>
-                    <Route component = { Login } path = { book.login } />
-                    <Route component = { Signup } path = { book.signUp } />
-                    <Redirect to = { book.login } />
-                </Switch>
-            );
+export default class App extends Component {
+    componentDidMount () {
+        this.props.initializeAsync();
+    }
+    render () {
+        const { isAuthenticated, isInitialized } = this.props;
+
+        if (!isInitialized) {
+            return <Loading />;
+        }
+
+        return isAuthenticated ? <Private /> : <Public />;
     }
 }
