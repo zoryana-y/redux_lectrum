@@ -32,7 +32,7 @@ export default class Like extends Component {
 
     _getLikedByMe = () => {
         const { profile, likes } = this.props;
-
+        
         return likes.some((like) => like.get('id') === profile.get('id'));
     };
 
