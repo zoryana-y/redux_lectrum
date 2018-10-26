@@ -32,7 +32,7 @@ export const postsReducer = (state = initialState, action) => {
             'likes'
             ],
             (likes) => {
-                return likes.filterNot((like) => like.get('id') === action.payload.liker.get('id'));
+                return likes.filterNot((like) => like.get('id') === action.payload.userId);
             });
 
         case types.CLEAR_POSTS:
