@@ -9,6 +9,7 @@ import { uiActions } from '../../../ui/actions';
 import { authActions } from '../../../auth/actions';
 import { profileAction } from '../../../profile/actions';
 import { postsActions } from '../../../posts/actions';
+import { usersActions } from '../../../users/actions';
 import { book } from '../../../../navigation/book';
 
 export function* logout () {
@@ -30,6 +31,7 @@ export function* logout () {
         yield apply(localStorage, localStorage.removeItem, ['remember']);
         yield put(profileAction.clearProfile());
         yield put(postsActions.clearPost());
+        yield put(usersActions.clearUsers());
         yield put(uiActions.stopFetching());
         yield put(authActions.logout());
         yield put(replace(book.login));

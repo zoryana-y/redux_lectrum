@@ -13,7 +13,7 @@ export function* signup ({ payload: userInfo }) {
 
         const response = yield apply(api, api.auth.signup, [userInfo]);
         const { data: profile, message } = yield apply(response, response.json);
-
+        
         if (response.status !== 200) {
             throw new Error(message);
         }
