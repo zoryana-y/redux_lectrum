@@ -2,6 +2,7 @@
 import { types } from './types';
 
 export const profileAction = {
+    // Sync
     fillProfile: (profile) => {
         return {
             type:    types.FILL_PROFILE,
@@ -9,9 +10,30 @@ export const profileAction = {
         };
     },
 
+    updateAvatar: (newAvatarUrl) => {
+        return {
+            type:    types.UPDATE_AVATAR,
+            payload: newAvatarUrl,
+        };
+    },
+
     clearProfile: () => {
         return {
             type: types.CLEAR_PROFILE,
+        };
+    },
+
+    // Async
+    updateNameAsync: (newName) => {
+        return {
+            type:    types.UPDATE_NAME_ASYNC,
+            payload: newName,
+        };
+    },
+    updateAvatarAsync: (newAvatar) => {
+        return {
+            type:    types.UPDATE_AVATAR_ASYNC,
+            payload: newAvatar,
         };
     },
 };
