@@ -9,7 +9,6 @@ import { profileAction } from '../../../profile/actions';
 
 export function* updateAvatar ({ payload: [newAvatar] }) {
     try {
-debugger
         yield put(uiActions.startFetching());
         const avatarFormData = yield new FormData();
 
