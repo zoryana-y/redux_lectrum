@@ -17,7 +17,7 @@ export function* updatePassword ({ payload: passwordData }) {
         }
 
     } catch (error) {
-        yield put(uiActions.emitError(error, `updateName ${error.message}`));
+        yield put(uiActions.emitError(error, `updatePassword ${error.message}`));
     } finally {
         alert('Password was changed!');
         yield put(uiActions.stopFetching());
